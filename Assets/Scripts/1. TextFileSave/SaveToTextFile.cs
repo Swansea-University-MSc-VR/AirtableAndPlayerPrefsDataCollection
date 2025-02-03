@@ -292,64 +292,6 @@ public class SaveToTextFile : MonoBehaviour
 
     public void ReadTextFile()
     {
-        customFileName = fileNameInputField.text;
 
-        // Set default directory to persistent data path if not specified
-        if (directoryName == null || directoryName == "")
-        {
-            directoryName = Application.persistentDataPath + "/";
-        }
-        else
-        {
-            directoryName = Application.persistentDataPath + "/" + customFolderName + "/";
-        }
-
-        // Check for empty file name
-        if (customFileName == null || customFileName == "")
-        {
-            fileNameInputFeedback.text = "Enter a file name";
-        }
-        else
-        {
-            string textDocumentPath = directoryName + customFileName + ".txt";
-
-            // Check if the directory exists
-            if (!Directory.Exists(directoryName))
-            {
-                fileNameInputFeedback.text = "Directory does not exist";
-            }
-            // Check if the file exists
-            else if (!File.Exists(textDocumentPath))
-            {
-                fileNameInputFeedback.text = "File does not exist";
-            }
-            else
-            {
-                try
-                {
-                    // Read the content from the file
-                    string fileContent = File.ReadAllText(textDocumentPath);
-
-                    // Check if the content is not empty
-                    if (!string.IsNullOrEmpty(fileContent))
-                    {
-                        // Display the content
-                        fileContentInputField.text = fileContent;
-                        Debug.Log("File content:\n" + fileContent);
-                    }
-                    else
-                    {
-                        // Provide feedback for empty file
-                        fileContentInputFeedback.text = "The file is empty";
-                    }
-                }
-                catch (Exception ex)
-                {
-                    // Handle exceptions, if any
-                    fileContentInputFeedback.text = "Error reading the file: " + ex.Message;
-                    Debug.LogError("Error reading the file: " + ex.Message);
-                }
-            }
-        }
     }
 }
